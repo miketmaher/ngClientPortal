@@ -24,6 +24,10 @@ export class ClientService {
     );
   }
 
+  addClient(client: Client) {
+    this.clientsCollection.add(client);
+  }
+
   getClients(): Observable<Client[]> {
     this.clients = this.clientsCollection.snapshotChanges().pipe(
       map(actions =>
