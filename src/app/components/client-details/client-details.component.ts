@@ -21,7 +21,7 @@ export class ClientDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private flashMessage: FlashMessagesService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -29,9 +29,17 @@ export class ClientDetailsComponent implements OnInit {
       if (client) {
         if (client.balance > 0) {
           this.hasBalance = true;
+        } else {
+          this.hasBalance = false
         }
       }
       this.client = client;
+    });
+  }
+  setBalance() {
+    this.service.updateClient(this.client);
+    this.flashMessage.show('Client Updated', {
+      cssClass: 'alert-success', timeout: 4000
     });
   }
 }
