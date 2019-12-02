@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { ClientService } from '../../services/client.service';
@@ -41,5 +41,14 @@ export class ClientDetailsComponent implements OnInit {
     this.flashMessage.show('Client Updated', {
       cssClass: 'alert-success', timeout: 4000
     });
+  }
+  onDelete() {
+    if (confirm('Are you Sure?')) {
+      this.service.deleteClient(this.client);
+      this.flashMessage.show('Client removed', {
+        cssClass: 'alert-success', timeout: 4000
+      });
+      this.router.navigate(['/']);
+    }
   }
 }
