@@ -8,6 +8,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class AuthService {
   constructor(private service: AngularFireAuth) {}
 
+  getAuth() {
+    return this.service.authState;
+  }
+
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.service.auth.signInWithEmailAndPassword(email, password).then(
@@ -17,7 +21,7 @@ export class AuthService {
     });
   }
 
-  getAuth() {
-    return this.service.authState;
+  logout() {
+    this.service.auth.signOut();
   }
 }
