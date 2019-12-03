@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { ClientService } from '../../services/client.service';
+import { SettingsService } from '../../services/settings.service';
 import Client from '../../models/Client';
 
 @Component({
@@ -19,14 +20,16 @@ export class AddClientComponent implements OnInit {
     balance: 0,
   };
 
-  isBalanceDisabled: boolean = true;
+  isBalanceDisabled: boolean = this.settingsService.getSettings()
+    .disableBalanceOnAdd;
 
   @ViewChild('addClientForm', { static: false })
   from: any;
 
   constructor(
     private flashMessage: FlashMessagesService,
-    private service: ClientService,
+    private clientService: ClientService,
+    private settingsService: SettingsService,
     private router: Router,
   ) {}
 
@@ -46,7 +49,7 @@ export class AddClientComponent implements OnInit {
         cssClass: 'alert-success',
         timeout: 4000,
       });
-      this.service.addClient(value);
+      this.clientService.addClient(value);
       this.router.navigate(['/']);
     }
   }
