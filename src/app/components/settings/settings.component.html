@@ -1,1 +1,34 @@
-<p>settings works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <a [routerLink]="['/']" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard
+    </a>
+  </div>
+  <div class="col-md-6"></div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Edit Settings
+  </div>
+  <div class="card-body">
+    <form (submit)="onSubmit()">
+      <div class="form-group">
+        <label>Allow Registration</label>
+        <input type="checkbox" name="isRegistrationEnabled" [checked]="settings.isRegistrationEnabled"
+          (change)="settings.isRegistrationEnabled = ! settings.isRegistrationEnabled" />
+      </div>
+      <div class="form-group">
+        <label>Disable balance on Add</label>
+        <input type="checkbox" name="isBalanceOnAddDisabled" [checked]="settings.isBalanceOnAddDisabled"
+          (change)="settings.isBalanceOnAddDisabled = ! settings.isBalanceOnAddDisabled" />
+      </div>
+      <div class="form-group">
+        <label>Disable balance on Edit</label>
+        <input type="checkbox" name="isBalanceOnEditDisabled" [checked]="settings.isBalanceOnEditDisabled"
+          (change)="settings.isBalanceOnEditDisabled = ! settings.isBalanceOnEditDisabled" />
+      </div>
+      <input type="submit" value="Save" class="btn btn-primary btn-block" />
+    </form>
+  </div>
+</div>
